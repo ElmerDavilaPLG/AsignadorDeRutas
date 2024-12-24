@@ -24,7 +24,7 @@ namespace UIAPI_PRACTICA02
             oCreationPackage.String = "Asignador de Rutas";
             oCreationPackage.Enabled = true;
             oCreationPackage.Position = -1;
-            String iconoAddon = @"C:\Users\Elmer Davila\Desktop\PACIFIC COLOR PROYECTO\HITO 02\Asignador de Rutas Addon\Imagenes\IconoCamion-16x16.bmp";
+            String iconoAddon = @"\\WIN-HV928VPQJRH\Logos\IconoCamion-16x16.bmp";
             oCreationPackage.Image = iconoAddon;
 
             oMenus = oMenuItem.SubMenus;

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AddOnRegData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SlientInstallation="No" SlientUpgrade="No" Partnernmsp="PLG" SchemaVersion="3.0" Type="" MultipleVersion="false" OnDemand="" OnPremise="" ExtName="Asignador de Rutas" ExtVersion="1.0" Contdata="elmer.davila@poligonnus.com" Partner="Poligonnus Consulting" DBType="MSSQL" ClientType="W">
+  <Validity>
+    <SBOCompatibility>
+      <Version From="930.110.01" To="100.000.180" />
+    </SBOCompatibility>
+  </Validity>
+  <Configuration>
+    <Repository>
+      <Properties />
+    </Repository>
+    <Deployment>
+      <Properties />
+    </Deployment>
+    <Assignment>
+      <Properties />
+    </Assignment>
+  </Configuration>
+  <Addons>
+    <Addon Name="" Group="" ForceFlag="" Visible="" AutoAssign="" SelfUpgrd="">
+      <x86 AddonExe="" AddonSig="">
+        <Installation>
+          <Files />
+        </Installation>
+        <Uninstallation>
+          <Files />
+        </Uninstallation>
+      </x86>
+      <x64 AddonExe="C:\Users\Elmer Davila\source\repos\Addon_AsignadorDeRutas\Addon_AsignadorDeRutas-master\UIAPI_PRACTICA02\bin\x64\Debug\UIAPI_PRACTICA02.exe" AddonSig="">
+        <Installation>
+          <Files>
+            <File FileName="UIAPI_PRACTICA02.b1s">
+              <Actions />
+            </File>
+            <File FileName="UIAPI_PRACTICA02.exe">
+              <Actions />
+            </File>
+          </Files>
+        </Installation>
+        <Uninstallation>
+          <Files>
+            <File FileName="UIAPI_PRACTICA02.b1s">
+              <Actions />
+            </File>
+            <File FileName="UIAPI_PRACTICA02.exe">
+              <Actions />
+            </File>
+          </Files>
+        </Uninstallation>
+      </x64>
+    </Addon>
+  </Addons>
+  <XApps>
+    <XApp Name="" Path="" FileName="" />
+  </XApps>
+  <UDQs>
+    <UDQ udqname="">
+      <Hana FileName="" />
+    </UDQ>
+  </UDQs>
+</AddOnRegData>

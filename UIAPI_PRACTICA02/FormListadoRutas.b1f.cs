@@ -62,55 +62,12 @@ namespace UIAPI_PRACTICA02
             oCompany = (SAPbobsCOM.Company)Application.SBO_Application.Company.GetDICompany();
 
             oForm = Application.SBO_Application.Forms.ActiveForm;
-            
 
-            //Cargar ComboBox de RUTAS
-            SAPbobsCOM.Recordset oRecordSetRutas = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlStringRutas = "SELECT \"Code\",\"Name\" FROM \"@PLG_MRUTAS\"";
-            oRecordSetRutas.DoQuery(sqlStringRutas);
+            cargarComboBoxRutas();
+            cargarComboBoxChoferes();
+            cargarComboBoxAcompanantes();
+            cargarComboBoxVehiculos();
 
-            while (!oRecordSetRutas.EoF)
-            {
-                if (oRecordSetRutas.Fields.Item("Code").Value.ToString().Trim().Length > 0)
-                    ComboBox0.ValidValues.Add(oRecordSetRutas.Fields.Item("Name").Value.ToString().Trim(), oRecordSetRutas.Fields.Item("Code").Value.ToString().Trim());
-                oRecordSetRutas.MoveNext();
-            }
-
-            //Carga ComboBox de Choferes
-            SAPbobsCOM.Recordset oRecordSetChoferes = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlStringChoferes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MCHOFERES\"";
-            oRecordSetChoferes.DoQuery(sqlStringChoferes);
-
-            while (!oRecordSetChoferes.EoF)
-            {
-                if (oRecordSetChoferes.Fields.Item("Code").Value.ToString().Trim().Length > 0)
-                    ComboBox1.ValidValues.Add(oRecordSetChoferes.Fields.Item("Name").Value.ToString().Trim(), oRecordSetChoferes.Fields.Item("Code").Value.ToString().Trim());
-                oRecordSetChoferes.MoveNext();
-            }
-
-            //Carga ComboBox de Acompañantes
-            SAPbobsCOM.Recordset oRecordSetAcompanantes = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlStringAcompanantes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MACOMPANANTES\"";
-            oRecordSetAcompanantes.DoQuery(sqlStringAcompanantes);
-
-            while (!oRecordSetAcompanantes.EoF)
-            {
-                if (oRecordSetAcompanantes.Fields.Item("Code").Value.ToString().Trim().Length > 0)
-                    ComboBox2.ValidValues.Add(oRecordSetAcompanantes.Fields.Item("Name").Value.ToString().Trim(), oRecordSetAcompanantes.Fields.Item("Code").Value.ToString().Trim());
-                oRecordSetAcompanantes.MoveNext();
-            }
-
-            //Carga ComboBox de Vehiculos
-            SAPbobsCOM.Recordset oRecordSetVehiculos = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlStringVehiculos = "SELECT \"Code\",\"U_PLG_VEHICULO\" FROM \"@PLG_MCHOFERES\"";
-            oRecordSetVehiculos.DoQuery(sqlStringVehiculos);
-
-            while (!oRecordSetVehiculos.EoF)
-            {
-                if (oRecordSetVehiculos.Fields.Item("Code").Value.ToString().Trim().Length > 0)
-                    ComboBox3.ValidValues.Add(oRecordSetVehiculos.Fields.Item("U_PLG_VEHICULO").Value.ToString().Trim(), oRecordSetVehiculos.Fields.Item("Code").Value.ToString().Trim());
-                oRecordSetVehiculos.MoveNext();
-            }
         }
 
         private SAPbouiCOM.EditText EditText0;
@@ -195,7 +152,7 @@ namespace UIAPI_PRACTICA02
 
                     oForm.Freeze(false);
                     oForm.Update();
-                    oForm.Mode=SAPbouiCOM.BoFormMode.fm_OK_MODE;
+                    oForm.Mode = SAPbouiCOM.BoFormMode.fm_OK_MODE;
                 }
                 catch (Exception e)
                 {
@@ -225,6 +182,70 @@ namespace UIAPI_PRACTICA02
             {
                 Application.SBO_Application.StatusBar.SetText("Solo se puede cambiar valores en este campo en el modo BUSCAR", SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Warning);
                 BubbleEvent = false;
+            }
+        }
+
+        public void cargarComboBoxRutas()
+        {
+            //Cargar ComboBox de RUTAS
+            SAPbobsCOM.Recordset oRecordSetRutas = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            string sqlStringRutas = "SELECT \"Code\",\"Name\" FROM \"@PLG_MRUTAS\"";
+            oRecordSetRutas.DoQuery(sqlStringRutas);
+            int contador = 1;
+            while (!oRecordSetRutas.EoF)
+            {
+                
+                if (oRecordSetRutas.Fields.Item("Code").Value.ToString().Trim().Length > 0)
+                {
+                    string codigoRuta = oRecordSetRutas.Fields.Item("Code").Value.ToString();
+                    string nombreRuta = oRecordSetRutas.Fields.Item("Name").Value.ToString();
+                    ComboBox0.ValidValues.Add(codigoRuta + " - " + nombreRuta, (contador++).ToString());
+                }
+                oRecordSetRutas.MoveNext();
+            }
+        }
+        private void cargarComboBoxChoferes()
+        {
+            //Carga ComboBox de Choferes
+            SAPbobsCOM.Recordset oRecordSetChoferes = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            string sqlStringChoferes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MCHOFERES\"";
+            oRecordSetChoferes.DoQuery(sqlStringChoferes);
+
+            while (!oRecordSetChoferes.EoF)
+            {
+                if (oRecordSetChoferes.Fields.Item("Code").Value.ToString().Trim().Length > 0)
+                    ComboBox1.ValidValues.Add(oRecordSetChoferes.Fields.Item("Name").Value.ToString().Trim(), oRecordSetChoferes.Fields.Item("Code").Value.ToString().Trim());
+                oRecordSetChoferes.MoveNext();
+            }
+        }
+
+        private void cargarComboBoxAcompanantes()
+        {
+            //Carga ComboBox de Acompañantes
+            SAPbobsCOM.Recordset oRecordSetAcompanantes = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            string sqlStringAcompanantes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MACOMPANANTES\"";
+            oRecordSetAcompanantes.DoQuery(sqlStringAcompanantes);
+
+            while (!oRecordSetAcompanantes.EoF)
+            {
+                if (oRecordSetAcompanantes.Fields.Item("Code").Value.ToString().Trim().Length > 0)
+                    ComboBox2.ValidValues.Add(oRecordSetAcompanantes.Fields.Item("Name").Value.ToString().Trim(), oRecordSetAcompanantes.Fields.Item("Code").Value.ToString().Trim());
+                oRecordSetAcompanantes.MoveNext();
+            }
+        }
+
+        private void cargarComboBoxVehiculos()
+        {
+            //Carga ComboBox de Vehiculos
+            SAPbobsCOM.Recordset oRecordSetVehiculos = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            string sqlStringVehiculos = "SELECT \"Code\",\"U_PLG_VEHICULO\" FROM \"@PLG_MCHOFERES\"";
+            oRecordSetVehiculos.DoQuery(sqlStringVehiculos);
+
+            while (!oRecordSetVehiculos.EoF)
+            {
+                if (oRecordSetVehiculos.Fields.Item("Code").Value.ToString().Trim().Length > 0)
+                    ComboBox3.ValidValues.Add(oRecordSetVehiculos.Fields.Item("U_PLG_VEHICULO").Value.ToString().Trim(), oRecordSetVehiculos.Fields.Item("Code").Value.ToString().Trim());
+                oRecordSetVehiculos.MoveNext();
             }
         }
     }

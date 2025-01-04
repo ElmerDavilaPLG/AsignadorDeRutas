@@ -208,7 +208,7 @@ namespace UIAPI_PRACTICA02
         {
             //Carga ComboBox de Choferes
             SAPbobsCOM.Recordset oRecordSetChoferes = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlStringChoferes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MCHOFERES\"";
+            string sqlStringChoferes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MCHOFERES\" WHERE \"U_PLG_ESTADO\" = 'Y'";
             oRecordSetChoferes.DoQuery(sqlStringChoferes);
 
             while (!oRecordSetChoferes.EoF)
@@ -223,7 +223,7 @@ namespace UIAPI_PRACTICA02
         {
             //Carga ComboBox de Acompañantes
             SAPbobsCOM.Recordset oRecordSetAcompanantes = (SAPbobsCOM.Recordset)this.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlStringAcompanantes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MACOMPANANTES\"";
+            string sqlStringAcompanantes = "SELECT \"Code\",\"Name\" FROM \"@PLG_MACOMPANANTES\" WHERE \"U_PLG_ESTADO\" = 'Y'";
             oRecordSetAcompanantes.DoQuery(sqlStringAcompanantes);
 
             while (!oRecordSetAcompanantes.EoF)
@@ -238,7 +238,7 @@ namespace UIAPI_PRACTICA02
         {
             //Carga ComboBox de Vehiculos
             SAPbobsCOM.Recordset oRecordSetVehiculos = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlStringVehiculos = "SELECT \"Code\",\"U_PLG_VEHICULO\" FROM \"@PLG_MCHOFERES\"";
+            string sqlStringVehiculos = "SELECT \"Code\",\"U_PLG_VEHICULO\" FROM \"@PLG_MCHOFERES\" WHERE \"U_PLG_ESTADO\" = 'Y'";
             oRecordSetVehiculos.DoQuery(sqlStringVehiculos);
 
             while (!oRecordSetVehiculos.EoF)

@@ -7,7 +7,10 @@ namespace UIAPI_PRACTICA02
 {
     class Menu
     {
-
+        public static Form1 form1 = null;
+        
+        public static FormAsignacionRuta formAsignacionRuta = null;
+        public static FormListadoRutas formListadoRutas = null;
         public void AddMenuItems()
         {
             SAPbouiCOM.Menus oMenus = null;
@@ -50,12 +53,12 @@ namespace UIAPI_PRACTICA02
                 oCreationPackage.UniqueID = "UIAPI_PRACTICA02.Form1";
                 oCreationPackage.String = "Modulo Desarrollo";
                 //oMenus.AddEx(oCreationPackage);
-
-                // SubMenu Facturas sin Asignar
+                    
                 oCreationPackage.Type = SAPbouiCOM.BoMenuType.mt_STRING;
                 oCreationPackage.UniqueID = "UIAPI_PRACTICA02.FormFacturasSinAsignar";
                 oCreationPackage.String = "Facturas sin Asignar";
                 oMenus.AddEx(oCreationPackage);
+                
 
                 // SubMenu Asignacion de Rutas
                 oCreationPackage.Type = SAPbouiCOM.BoMenuType.mt_STRING;
@@ -81,29 +84,31 @@ namespace UIAPI_PRACTICA02
         {
             BubbleEvent = true;
 
-            
-
             try
             {
                 if (pVal.BeforeAction && pVal.MenuUID == "UIAPI_PRACTICA02.Form1")
                 {
-                    Form1 activeForm = new Form1();
-                    activeForm.Show();
+                    Form1 form1 = new Form1();
+                    form1.Show();
+
                 }
                 else if (pVal.BeforeAction && pVal.MenuUID == "UIAPI_PRACTICA02.FormFacturasSinAsignar")
                 {
-                    FormFacturasSinAsignar activeForm = new FormFacturasSinAsignar();
-                    activeForm.Show();
+                    FormFacturasSinAsignar formFacturasSinAsignar = new FormFacturasSinAsignar();
+                    formFacturasSinAsignar.Show();
+                   
                 }
                 else if (pVal.BeforeAction && pVal.MenuUID == "UIAPI_PRACTICA02.FormAsignacionRuta")
                 {
-                    FormAsignacionRuta activeForm = new FormAsignacionRuta();
-                    activeForm.Show();
+                    FormAsignacionRuta formAsignacionRuta = new FormAsignacionRuta();
+                    formAsignacionRuta.Show();
+                    
                 }
                 else if (pVal.BeforeAction && pVal.MenuUID == "UIAPI_PRACTICA02.FormListadoRutas")
                 {
-                    FormListadoRutas activeForm = new FormListadoRutas();
-                    activeForm.Show();
+                    FormListadoRutas formListadoRutas = new FormListadoRutas();      
+                    formListadoRutas.Show();
+
                 }
             }
             catch (Exception ex)
@@ -111,6 +116,7 @@ namespace UIAPI_PRACTICA02
                 Application.SBO_Application.MessageBox(ex.ToString(), 1, "Ok", "", "");
             }
         }
+
 
     }
 }

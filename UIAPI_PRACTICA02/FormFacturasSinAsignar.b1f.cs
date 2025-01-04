@@ -7,13 +7,16 @@ using System.Text;
 namespace UIAPI_PRACTICA02
 {
     [FormAttribute("UIAPI_PRACTICA02.FormFacturasSinAsignar", "FormFacturasSinAsignar.b1f")]
-    class FormFacturasSinAsignar : UserFormBase
+    public sealed class FormFacturasSinAsignar : UserFormBase
     {
         private SAPbobsCOM.Company oCompany;
+        private SAPbouiCOM.Form oForm;
         public FormFacturasSinAsignar()
         {
             
         }
+
+        private static FormFacturasSinAsignar _instance;
 
         /// <summary>
         /// Initialize components. Called by framework after form created.
@@ -53,8 +56,9 @@ namespace UIAPI_PRACTICA02
         private void OnCustomInitialize()
         {
             oCompany = (SAPbobsCOM.Company)Application.SBO_Application.Company.GetDICompany();
+            
             //SAPbobsCOM.Company oCompany = (SAPbobsCOM.Company)Application.SBO_Application.Company.GetDICompany();
-            SAPbobsCOM.Recordset oRset = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            /*SAPbobsCOM.Recordset oRset = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
             string Query = "SELECT Facturas, Creacion, Bultos, Cliente, Nombre, Direccion, Comuna, Comentarios, Ruta FROM PLG_VW_FACTURAS_SIN_ASIGNAR";
             oRset.DoQuery(Query);
             if (oRset.RecordCount > 0)
@@ -75,7 +79,7 @@ namespace UIAPI_PRACTICA02
                 }
             }
 
-            Matrix1.AutoResizeColumns();
+            Matrix1.AutoResizeColumns();*/
         }
 
         private SAPbouiCOM.StaticText StaticText0;
@@ -122,6 +126,7 @@ namespace UIAPI_PRACTICA02
             //throw new System.NotImplementedException();
             Button0.Item.Enabled = false;
             Matrix1.Clear();
+            oForm = Application.SBO_Application.Forms.ActiveForm;
             String fechaInicio = EditText0.Value.ToString().Trim();
             String fechaFin = EditText1.Value.ToString().Trim();
             String Socio = EditText2.Value.ToString().Trim();
@@ -136,7 +141,7 @@ namespace UIAPI_PRACTICA02
 
             try
             {
-                SAPbouiCOM.Form oForm = Application.SBO_Application.Forms.Item("FormFacturasSinAsignar");
+                //SAPbouiCOM.Form oForm = Application.SBO_Application.Forms.Item("FormFacturasSinAsignar");
                 oForm.Freeze(true);
 
                 if (oRset.RecordCount > 0)
@@ -164,13 +169,11 @@ namespace UIAPI_PRACTICA02
                 Application.SBO_Application.MessageBox(e.ToString(), 1, "Ok", "", "");
             }
 
-            //EditText0.Value = "";
-            //EditText1.Value = "";
             EditText2.Value = "";
             EditText3.Value = "";
 
             Button0.Item.Enabled = true;
-
+            Matrix1.AutoResizeColumns();
         }
 
     }

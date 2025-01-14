@@ -23,7 +23,7 @@ namespace UIAPI_PRACTICA02
         /// </summary>
         public override void OnInitializeComponent()
         {
-            //          this.Matrix1.MatrixLoadBefore += new SAPbouiCOM._IMatrixEvents_MatrixLoadBeforeEventHandler(this.Matrix1_MatrixLoadBefore);
+            
             this.OnInitializeFormEvents();
             this.StaticText0 = ((SAPbouiCOM.StaticText)(this.GetItem("Item_0").Specific));
             this.StaticText1 = ((SAPbouiCOM.StaticText)(this.GetItem("Item_1").Specific));
@@ -57,29 +57,6 @@ namespace UIAPI_PRACTICA02
         {
             oCompany = (SAPbobsCOM.Company)Application.SBO_Application.Company.GetDICompany();
             
-            //SAPbobsCOM.Company oCompany = (SAPbobsCOM.Company)Application.SBO_Application.Company.GetDICompany();
-            /*SAPbobsCOM.Recordset oRset = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string Query = "SELECT Facturas, Creacion, Bultos, Cliente, Nombre, Direccion, Comuna, Comentarios, Ruta FROM PLG_VW_FACTURAS_SIN_ASIGNAR";
-            oRset.DoQuery(Query);
-            if (oRset.RecordCount > 0)
-            {
-                for (int i = 0; i < oRset.RecordCount; i++)
-                {
-                    Matrix1.AddRow();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colFactura").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Facturas").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colCreaci").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Creacion").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colBultos").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Bultos").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colClient").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Cliente").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colNombre").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Nombre").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colDirecc").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Direccion").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colComuna").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Comuna").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colComent").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Comentarios").Value.ToString();
-                    ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colRuta").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Ruta").Value.ToString();
-                    oRset.MoveNext();
-                }
-            }
-
-            Matrix1.AutoResizeColumns();*/
         }
 
         private SAPbouiCOM.StaticText StaticText0;
@@ -131,7 +108,6 @@ namespace UIAPI_PRACTICA02
             String fechaFin = EditText1.Value.ToString().Trim();
             String Socio = EditText2.Value.ToString().Trim();
 
-            //SAPbobsCOM.Company oCompany = (SAPbobsCOM.Company)Application.SBO_Application.Company.GetDICompany();
             SAPbobsCOM.Recordset oRset = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
 
 
@@ -158,6 +134,7 @@ namespace UIAPI_PRACTICA02
                         ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colComuna").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Comuna").Value.ToString();
                         ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colComent").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Comentarios").Value.ToString();
                         ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colRuta").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Ruta").Value.ToString();
+                        ((SAPbouiCOM.EditText)Matrix1.Columns.Item("colFolio").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Folio").Value.ToString();
                         oRset.MoveNext();
                     }
                 }

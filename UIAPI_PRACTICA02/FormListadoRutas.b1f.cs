@@ -138,6 +138,7 @@ namespace UIAPI_PRACTICA02
                         for (int i = 0; i < oRset.RecordCount; i++)
                         {
                             Matrix0.AddRow();
+                            ((SAPbouiCOM.EditText)Matrix0.Columns.Item("colFolio").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Folio").Value.ToString();
                             ((SAPbouiCOM.EditText)Matrix0.Columns.Item("colFactur").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Facturas").Value.ToString();
                             ((SAPbouiCOM.EditText)Matrix0.Columns.Item("colComb").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Combinacion").Value.ToString();
                             ((SAPbouiCOM.EditText)Matrix0.Columns.Item("colClient").Cells.Item(i + 1).Specific).Value = oRset.Fields.Item("Cliente").Value.ToString();

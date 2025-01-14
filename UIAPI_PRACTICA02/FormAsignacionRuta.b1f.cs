@@ -58,6 +58,8 @@ namespace UIAPI_PRACTICA02
             this.StaticText12 = ((SAPbouiCOM.StaticText)(this.GetItem("Item_26").Specific));
             this.ComboBox1 = ((SAPbouiCOM.ComboBox)(this.GetItem("Item_27").Specific));
             this.ComboBox2 = ((SAPbouiCOM.ComboBox)(this.GetItem("Item_28").Specific));
+            this.StaticText13 = ((SAPbouiCOM.StaticText)(this.GetItem("Item_2").Specific));
+            this.EditText0 = ((SAPbouiCOM.EditText)(this.GetItem("Item_30").Specific));
             this.OnCustomInitialize();
 
         }
@@ -166,6 +168,7 @@ namespace UIAPI_PRACTICA02
             {
                 ComboBox2.ValidValues.Remove(0, SAPbouiCOM.BoSearchKey.psk_Index);
             }
+            
 
             String fechaDespacho = EditText9.Value.ToString();
 
@@ -241,16 +244,25 @@ namespace UIAPI_PRACTICA02
         {
             //throw new System.NotImplementedException();
             string fechaDespacho = EditText9.Value.ToString();
+            string rutaAsignada = String.Empty;
+            string codigoRuta = String.Empty;
 
-            string rutaAsignada = ComboBox3.Selected.Value;
-            int posicionEspacio = rutaAsignada.IndexOf(' ');
+            if (ComboBox3.Selected == null)
+            {
+                rutaAsignada = "";
+            }
+            else
+            {
+                rutaAsignada = ComboBox3.Selected.Value;
+                int posicionEspacio = rutaAsignada.IndexOf(' ');
 
-            SAPbobsCOM.Recordset oRecordRutaSeleccionada = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string sqlCodigoRutaSelect = "SELECT \"Code\" FROM \"@PLG_MRUTAS\" WHERE \"Code\" = '" + rutaAsignada.Substring(0, posicionEspacio) + "'";
-            oRecordRutaSeleccionada.DoQuery(sqlCodigoRutaSelect);
+                SAPbobsCOM.Recordset oRecordRutaSeleccionada = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+                string sqlCodigoRutaSelect = "SELECT \"Code\" FROM \"@PLG_MRUTAS\" WHERE \"Code\" = '" + rutaAsignada.Substring(0, posicionEspacio) + "'";
+                oRecordRutaSeleccionada.DoQuery(sqlCodigoRutaSelect);
 
-            string codigoRuta = oRecordRutaSeleccionada.Fields.Item("Code").Value.ToString();
-
+                codigoRuta = oRecordRutaSeleccionada.Fields.Item("Code").Value.ToString();
+            }
+            cargarComboBoxCombinaciones();
             EditText1.Value = codigoRuta + "-" + fechaDespacho;
         }
 
@@ -297,5 +309,8 @@ namespace UIAPI_PRACTICA02
             }
 
         }
+
+        private SAPbouiCOM.StaticText StaticText13;
+        private SAPbouiCOM.EditText EditText0;
     }
 }

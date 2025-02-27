@@ -44,7 +44,7 @@ namespace UIAPI_PRACTICA02
             this.EditText9 = ((SAPbouiCOM.EditText)(this.GetItem("Item_22").Specific));
             this.EditText9.ValidateAfter += new SAPbouiCOM._IEditTextEvents_ValidateAfterEventHandler(this.EditText9_ValidateAfter);
             this.Button0 = ((SAPbouiCOM.Button)(this.GetItem("1").Specific));
-            this.Button0.ClickBefore += new SAPbouiCOM._IButtonEvents_ClickBeforeEventHandler(this.Button0_ClickBefore);
+            this.Button0.PressedBefore += new SAPbouiCOM._IButtonEvents_PressedBeforeEventHandler(this.Button0_PressedBefore);
             this.Button1 = ((SAPbouiCOM.Button)(this.GetItem("2").Specific));
             this.ComboBox3 = ((SAPbouiCOM.ComboBox)(this.GetItem("Item_29").Specific));
             this.ComboBox3.ComboSelectAfter += new SAPbouiCOM._IComboBoxEvents_ComboSelectAfterEventHandler(this.ComboBox3_ComboSelectAfter);
@@ -127,7 +127,8 @@ namespace UIAPI_PRACTICA02
         private SAPbouiCOM.StaticText StaticText12;
         private SAPbouiCOM.ComboBox ComboBox1;
         private SAPbouiCOM.ComboBox ComboBox2;
-
+        private SAPbouiCOM.StaticText StaticText13;
+        private SAPbouiCOM.EditText EditText0;
 
         //BOTON NUEVO GRUPO: Funciona para crear nuevo grupo de combinaciones
         private void Button2_ClickBefore(object sboObject, SAPbouiCOM.SBOItemEventArg pVal, out bool BubbleEvent)
@@ -268,26 +269,10 @@ namespace UIAPI_PRACTICA02
 
 
         //BOTON ACTUALIZAR: Actualiza el codigo de la lista de ruta al momento de presionarlo como actualizar
-        private void Button0_ClickBefore(object sboObject, SAPbouiCOM.SBOItemEventArg pVal, out bool BubbleEvent)
+        /*private void Button0_ClickBefore(object sboObject, SAPbouiCOM.SBOItemEventArg pVal, out bool BubbleEvent)
         {
-            BubbleEvent = true;
-            //throw new System.NotImplementedException();
-            if (oForm.Mode == SAPbouiCOM.BoFormMode.fm_UPDATE_MODE)
-            {
-                string fechaDespacho = EditText9.Value.ToString();
-
-                string rutaAsignada = ComboBox3.Selected.Value;
-                int posicionEspacio = rutaAsignada.IndexOf(' ');
-
-                SAPbobsCOM.Recordset oRecordRutaSeleccionada = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-                string sqlCodigoRutaSelect = "SELECT \"Code\" FROM \"@PLG_MRUTAS\" WHERE \"Code\" = '" + rutaAsignada.Substring(0, posicionEspacio) + "'";
-                oRecordRutaSeleccionada.DoQuery(sqlCodigoRutaSelect);
-
-                string codigoRuta = oRecordRutaSeleccionada.Fields.Item("Code").Value.ToString();
-
-                EditText1.Value = codigoRuta + "-" + fechaDespacho;
-            }
-        }
+            
+        }*/
 
         //COMBOBOX DIRECCIONES: Despues que se seleccionar la direccion se llena en automatico la comuna
         private void ComboBox0_ComboSelectAfter(object sboObject, SAPbouiCOM.SBOItemEventArg pVal)
@@ -309,8 +294,26 @@ namespace UIAPI_PRACTICA02
             }
 
         }
+        private void Button0_PressedBefore(object sboObject, SAPbouiCOM.SBOItemEventArg pVal, out bool BubbleEvent)
+        {
+            BubbleEvent = true;
+            oForm = Application.SBO_Application.Forms.ActiveForm;
 
-        private SAPbouiCOM.StaticText StaticText13;
-        private SAPbouiCOM.EditText EditText0;
+            if (oForm.Mode == SAPbouiCOM.BoFormMode.fm_UPDATE_MODE)
+            {
+                string fechaDespacho = EditText9.Value.ToString();
+
+                string rutaAsignada = ComboBox3.Selected.Value;
+                int posicionEspacio = rutaAsignada.IndexOf(' ');
+
+                SAPbobsCOM.Recordset oRecordRutaSeleccionada = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+                string sqlCodigoRutaSelect = "SELECT \"Code\" FROM \"@PLG_MRUTAS\" WHERE \"Code\" = '" + rutaAsignada.Substring(0, posicionEspacio) + "'";
+                oRecordRutaSeleccionada.DoQuery(sqlCodigoRutaSelect);
+
+                string codigoRuta = oRecordRutaSeleccionada.Fields.Item("Code").Value.ToString();
+
+                EditText1.Value = codigoRuta + "-" + fechaDespacho;
+            }
+        }
     }
 }
